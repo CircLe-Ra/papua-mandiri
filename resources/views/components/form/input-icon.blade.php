@@ -1,0 +1,31 @@
+@props(['label', 'id', 'name', 'size' => 'base', 'disabled' => false, 'placeholder', 'icon' => null, 'position' => 'right'])
+
+@php
+    $size = match ($size) {
+        'large' => 'p-4 text-base',
+        'base' => 'p-2.5 text-sm',
+        'small' => 'p-2 text-xs',
+    };
+
+    $position = match ($position){
+        'right' => 'absolute inset-y-0 end-0 flex items-center pe-3.5 pointer-events-none',
+        'left' => 'absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none'
+    };
+@endphp
+
+<div>
+    @isset($label)
+        <label for="{{ $id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $label ?? 'label' }}</label>
+    @endisset
+    <div class="relative">
+        <div class="{{ $position }}">
+            @isset($icon)
+                {{ $icon }}
+            @endisset
+        </div>
+        <input type="text" id="{{ $id }}" name="{{ $name }}" class="{{ $position == 'right' ? 'ps-10' : 'ps-5 pe-10' }} bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 {{ $size }}"  @disabled($disabled) placeholder="{{ $placeholder ?? '' }}" {{ $attributes->whereStartsWith('wire:model') }}>
+        @error($name)
+            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{ $message }}</p>
+        @enderror
+    </div>
+</div>
