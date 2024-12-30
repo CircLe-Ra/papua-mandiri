@@ -35,7 +35,7 @@ $store = function () {
         Reception::updateOrCreate(['id' => $this->id], [
             'period' => $this->period,
             'start_course' => $this->start_course,
-            'complete_course' => $this->complete_course
+            'complete_course' => $this->complete_course,
         ]);
         unset($this->receptions);
         $this->reset(['period', 'id', 'start_course', 'complete_course']);
@@ -106,13 +106,12 @@ $changeStatus = function ($id, $status) {
         <div class="w-full col-span-3 lg:col-span-1">
             <x-card class="mt-2" >
                 <x-slot name="header">
-                    Tambah Periode
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Tambah Periode</h5>
                 </x-slot>
                 <form wire:submit="store" class="max-w-sm mx-auto">
-                    <x-form.input type="number" id="period" name="period" wire:model="period" label="Nama"
-                                  placeholder="Masukan Periode"/>
-                    <x-form.input type="date" id="start_course" name="start_course" wire:model="start_course" label="Mulai Kursus"/>
-                    <x-form.input type="date" id="complete_course" name="complete_course" wire:model="complete_course" label="Selesai Kursus"/>
+                    <x-form.input type="number" id="period" name="period" wire:model="period" label="Nama" placeholder="Masukan Periode" main-class="mb-2"/>
+                    <x-form.input type="date" id="start_course" name="start_course" wire:model="start_course" label="Mulai Kursus" main-class="mb-2"/>
+                    <x-form.input type="date" id="complete_course" name="complete_course" wire:model="complete_course" label="Selesai Kursus" main-class="mb-5"/>
                     <div class="flex justify-end space-x-2">
                         <x-button type="reset" color="light">
                             Batal
@@ -127,7 +126,7 @@ $changeStatus = function ($id, $status) {
         <div class="col-span-2 ">
             <x-card class="mt-2 w-full ">
                 <x-slot name="header">
-                    Daftar Periode
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Daftar Periode</h5>
                 </x-slot>
                 <x-slot name="sideHeader">
                     <x-form.input-select id="show" name="show" wire:model.live="show" size="xs" class="w-full">
@@ -157,7 +156,7 @@ $changeStatus = function ($id, $status) {
                                     {{ \Carbon\Carbon::parse($reception->complete_course)->format('d/m/Y') }}
                                 </td>
                                 <td class="px-6 py-4">
-                                   <button id="dropdownStatus{{ $key }}" data-dropdown-toggle="dropdown-status{{ $key }}"  data-dropdown-placement="right-end" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-7 py-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full relative" type="button">
+                                   <button id="dropdownStatus{{ $key }}" data-dropdown-toggle="dropdown-status{{ $key }}"  data-dropdown-placement="right-end" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-1.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full relative" type="button">
                                        <div class="-ml-2 whitespace-nowrap">
                                        {{ $reception->status == 'active' ? 'Aktif' : 'Tidak Aktif' }}
                                        </div>
@@ -166,7 +165,7 @@ $changeStatus = function ($id, $status) {
                                         </svg>
                                     </button>
                                     <!-- Dropdown menu -->
-                                    <div id="dropdown-status{{ $key }}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                    <div id="dropdown-status{{ $key }}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700">
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownStatus{{ $key }}">
                                             <li>
                                                 <a href="#" wire:click="changeStatus({{ $reception->id }}, 'active')" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Aktifkan</a>
@@ -178,22 +177,22 @@ $changeStatus = function ($id, $status) {
                                     </div>
 
                                 </td>
-                                <td class="space-x-2 space-y-2 pb-2">
-                                    <x-a href="{{ route('admin.reception.opening', $reception->id) }}" color="blue" >
+                                <td class="space-x-2 space-y-2 py-3 text-center">
+                                    <x-a wire:navigate href="{{ route('admin.reception.opening', $reception->id) }}" color="blue"  class="text-nowrap mb-2">
                                         Buka Program
                                     </x-a>
                                     <x-button color="yellow" wire:click="edit({{ $reception->id }})" :disabled="$reception->openings->count() > 0">
                                         Edit
                                     </x-button>
-                                        <x-button color="red" wire:click="destroy({{ $reception->id }})" wire:confirm="Yakin?" :disabled="$reception->openings->count() > 0">
-                                            Hapus
-                                        </x-button>
+                                    <x-button color="red" wire:click="destroy({{ $reception->id }})" wire:confirm="Yakin?" :disabled="$reception->openings->count() > 0">
+                                        Hapus
+                                    </x-button>
                                 </td>
                             </tr>
                         @endforeach
                     @else
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                            <td class="px-6 py-4 text-center" colspan="6">
+                            <td class="px-6 py-4 text-center" colspan="5">
                                 Tidak ada data
                             </td>
                         </tr>

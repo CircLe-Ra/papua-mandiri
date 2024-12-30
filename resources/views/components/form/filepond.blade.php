@@ -29,7 +29,7 @@
                 if(event.detail[0].file) {
                     pond.setOptions({
                         files: [{
-                            source: '{{ asset('storage') }}/' + event.detail[0].file,
+                            source: '{{ public_path('storage') }}/' + event.detail[0].file,
                             options: {
                                 type: 'local',
                             },
@@ -44,4 +44,13 @@
         }">
         <input type="file" x-ref="inputFilepond">
     </div>
+    @pushonce('scripts')
+        <script>
+            window.addEventListener('livewire:navigated', () => {
+                FilePond.registerPlugin(FilePondPluginFileValidateType);
+                FilePond.registerPlugin(FilePondPluginFileValidateSize);
+                FilePond.registerPlugin(FilePondPluginImagePreview);
+            });
+        </script>
+    @endpushonce
 </div>

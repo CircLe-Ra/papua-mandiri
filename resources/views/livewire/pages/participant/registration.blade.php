@@ -15,7 +15,6 @@ use App\Models\Religion;
 use Carbon\Carbon;
 use Midtrans\Config;
 use Midtrans\Snap;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 layout('layouts.app');
 usesPagination();
@@ -39,27 +38,26 @@ mount(function () {
         $this->program = Program::where('id', $this->participant->program_id)->first();
     }
     $this->step = StepTemp::where('user_id', auth()->user()->id)->where('reception_id', $this->reception->id)->first()->step ?? 1;
-
     $data = PersonalData::where('user_id', auth()->user()->id)->first();
-    $this->personal_data_id = $data->id;
-    $this->ktp_number = $data->ktp_number;
-    $this->full_name = $data->full_name;
-    $this->gender = $data->gender;
-    $this->birth_date = $data->birth_date;
-    $this->birth_place = $data->birth_place;
-    $this->address = $data->address;
-    $this->rt = $data->rt;
-    $this->rw = $data->rw;
-    $this->sub_district_id = $data->sub_district_id;
-    $this->district_id = $data->district_id;
-    $this->regency_id = $data->regency_id;
-    $this->province_id = $data->province_id;
-    $this->marital_status = $data->marital_status;
-    $this->occupation = $data->occupation;
-    $this->religion_id = $data->religion_id;
-    $this->nationality = $data->nationality;
-    $this->blood_type = $data->blood_type;
-    $this->phone = $data->phone;
+    $this->personal_data_id = $data->id ?? '';
+    $this->ktp_number = $data->ktp_number ?? '';
+    $this->full_name = $data->full_name ?? '';
+    $this->gender = $data->gender ?? '';
+    $this->birth_date = $data->birth_date ?? '';
+    $this->birth_place = $data->birth_place ?? '';
+    $this->address = $data->address ?? '';
+    $this->rt = $data->rt ?? '';
+    $this->rw = $data->rw ?? '';
+    $this->sub_district_id = $data->sub_district_id ?? '';
+    $this->district_id = $data->district_id ?? '';
+    $this->regency_id = $data->regency_id ?? '';
+    $this->province_id = $data->province_id ?? '';
+    $this->marital_status = $data->marital_status ?? '';
+    $this->occupation = $data->occupation ?? '';
+    $this->religion_id = $data->religion_id ?? '';
+    $this->nationality = $data->nationality ?? '';
+    $this->blood_type = $data->blood_type ?? '';
+    $this->phone = $data->phone ?? '';
     $this->province_id ? $this->cities = Regency::where('province_id', $this->province_id)->get() : $this->cities = [];
     $this->regency_id ? $this->districts = District::where('regency_id', $this->regency_id)->get() : $this->districts = [];
     $this->district_id ? $this->sub_districts = SubDistrict::where('district_id', $this->district_id)->get() : $this->sub_districts = [];
@@ -150,6 +148,7 @@ $nextStep = function () {
                 if ($this->step < 5) {
                     $this->step++;
                     StepTemp::updateOrCreate(['user_id' => auth()->user()->id, 'reception_id' => $this->reception->id], ['step' => $this->step]);
+
                 }
             } catch (\Exception $e) {
                 Toaster::error($e->getMessage());
@@ -266,41 +265,29 @@ $pay = function () {
                         <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400">
                             <li class="mb-10 ms-6">
                                 @if($this->step <= 1)
-                                    <span
-                                        class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-                                <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
-                                     xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g
-                                        fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="4"><path d="M22 8v12c0 2.21-4.03 4-9 4s-9-1.79-9-4V8"/><path
-                                            d="M22 14c0 2.21-4.03 4-9 4s-9-1.79-9-4"/><path fill="currentColor"
-                                                                                            d="M22 8c0 2.21-4.03 4-9 4s-9-1.79-9-4s4.03-4 9-4s9 1.79 9 4"/><path
-                                            d="M32 6h6a4 4 0 0 1 4 4v6M16 42h-6a4 4 0 0 1-4-4v-6"/><circle cx="35"
-                                                                                                           cy="29" r="5"
-                                                                                                           fill="currentColor"/><path
-                                            fill="currentColor" d="M44 44H26a9 9 0 1 1 18 0"/></g></svg>
-                            </span>
+                                     <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
+                                        <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                                            <path
+                                                d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z"/>
+                                        </svg>
+                                    </span>
                                 @else
-                                    <span
-                                        class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
-                                <svg class="w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                                </svg>
-                            </span>
+                                    <span class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
+                                        <svg class="w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true"
+                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                  stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </span>
                                 @endif
                                 <h3 class="font-medium leading-tight">Data Diri</h3>
                                 <p class="text-sm">Detail langkah di sini</p>
                             </li>
                             <li class="mb-10 ms-6">
                                 @if($this->step <= 2)
-                                    <span
-                                        class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-                                        <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
-                                            <path
-                                                d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z"/>
-                                        </svg>
+                                    <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
+                                        <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M1.637 1.637C.732 1.637 0 2.369 0 3.273v17.454c0 .904.732 1.636 1.637 1.636h20.726c.905 0 1.637-.732 1.637-1.636V3.273c0-.904-.732-1.636-1.637-1.636zm.545 2.181h19.636v16.364h-2.726v-1.09h-4.91v1.09h-12zM12 8.182a1.636 1.636 0 1 0 0 3.273a1.636 1.636 0 1 0 0-3.273m-4.363 1.91c-.678 0-1.229.55-1.229 1.226a1.228 1.228 0 0 0 2.455 0c0-.677-.549-1.226-1.226-1.226m8.726 0a1.227 1.227 0 1 0 0 2.453a1.227 1.227 0 0 0 0-2.453M12 12.545c-1.179 0-2.413.401-3.148 1.006a4.1 4.1 0 0 0-1.215-.188c-1.314 0-2.729.695-2.729 1.559v.896h14.184v-.896c0-.864-1.415-1.559-2.729-1.559c-.41 0-.83.068-1.215.188c-.735-.605-1.969-1.006-3.148-1.006"/></svg>
                                     </span>
                                 @else
                                     <span
@@ -319,11 +306,7 @@ $pay = function () {
                                 @if($this->step <= 3)
                                     <span
                                         class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-                                        <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                                            <path
-                                                d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
-                                        </svg>
+                                        <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M4.75 4A2.75 2.75 0 0 0 2 6.75V8h16V6.75A2.75 2.75 0 0 0 15.25 4zM18 9H2v4.25A2.75 2.75 0 0 0 4.75 16h10.5A2.75 2.75 0 0 0 18 13.25zm-4.5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1"/></svg>
                                     </span>
                                 @else
                                     <span
@@ -367,54 +350,54 @@ $pay = function () {
                 <div class="col-span-2">
                     <x-card class="mt-2 w-full ">
                         <form>
-                            <x-slot name="header" class="w-full -mt-3">
+                            <x-slot name="header" class=" -mt-3">
                                 @if ($step == 1)
-                                    <div class="">
+                                        <div class="w-full">
+                                            <h5 class="text-xl font-medium text-gray-900 dark:text-white">Data Diri</h5>
+                                            <p class="text-sm text-gray-600 dark:text-gray-300">Lengkapi Data Diri sesuai dengan KTP anda.</p>
+                                        </div>
                                         <div class="flex items-center space-x-2 justify-end w-full mb-2">
                                             <button type="submit" class="" wire:click="nextStep">
                                                 <p class="text-sm text-gray-600 dark:text-gray-300 inline">Kelas
                                                     Belajar</p>
-                                                <svg class="rotate-180 inline" xmlns="http://www.w3.org/2000/svg"
+                                                <svg class="rotate-180 inline -mt-1 dark:text-gray-300 text-gray-600" xmlns="http://www.w3.org/2000/svg"
                                                      width="24" height="24" viewBox="0 0 24 24">
-                                                    <path fill="currentColor"
-                                                          d="m7.825 13l4.9 4.9q.3.3.288.7t-.313.7q-.3.275-.7.288t-.7-.288l-6.6-6.6q-.15-.15-.213-.325T4.426 12t.063-.375t.212-.325l6.6-6.6q.275-.275.688-.275t.712.275q.3.3.3.713t-.3.712L7.825 11H19q.425 0 .713.288T20 12t-.288.713T19 13z"/>
+                                                    <path fill="currentColor" d="m7.825 13l4.9 4.9q.3.3.288.7t-.313.7q-.3.275-.7.288t-.7-.288l-6.6-6.6q-.15-.15-.213-.325T4.426 12t.063-.375t.212-.325l6.6-6.6q.275-.275.688-.275t.712.275q.3.3.3.713t-.3.712L7.825 11H19q.425 0 .713.288T20 12t-.288.713T19 13z"/>
                                                 </svg>
                                             </button>
                                         </div>
-                                        Data Diri
-                                        <p class="text-sm text-gray-600 dark:text-gray-300">Lengkapi Data Diri sesuai
-                                            dengan KTP anda.</p>
-                                    </div>
                                 @elseif ($step == 2)
-                                    <div class="">
+                                    <div class="w-full">
                                         <div class="flex items-center space-x-2 justify-between w-full mb-2">
-                                            <button type="submit" class="" wire:click="prevStep">
-                                                <svg class=" inline" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            <button type="submit" class="dark:text-gray-300 text-gray-600" wire:click="prevStep">
+                                                <svg class=" inline -mt-1" xmlns="http://www.w3.org/2000/svg" width="24"
                                                      height="24" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                           d="m7.825 13l4.9 4.9q.3.3.288.7t-.313.7q-.3.275-.7.288t-.7-.288l-6.6-6.6q-.15-.15-.213-.325T4.426 12t.063-.375t.212-.325l6.6-6.6q.275-.275.688-.275t.712.275q.3.3.3.713t-.3.712L7.825 11H19q.425 0 .713.288T20 12t-.288.713T19 13z"/>
                                                 </svg>
                                                 <p class="text-sm text-gray-600 dark:text-gray-300 inline">Data Diri</p>
                                             </button>
-                                            <button type="submit" class="" wire:click="nextStep">
+                                            <button type="submit" class="dark:text-gray-300 text-gray-600" wire:click="nextStep">
                                                 <p class="text-sm text-gray-600 dark:text-gray-300 inline">
                                                     Pembayaran</p>
-                                                <svg class="rotate-180 inline" xmlns="http://www.w3.org/2000/svg"
+                                                <svg class="rotate-180 inline -mt-1" xmlns="http://www.w3.org/2000/svg"
                                                      width="24" height="24" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                           d="m7.825 13l4.9 4.9q.3.3.288.7t-.313.7q-.3.275-.7.288t-.7-.288l-6.6-6.6q-.15-.15-.213-.325T4.426 12t.063-.375t.212-.325l6.6-6.6q.275-.275.688-.275t.712.275q.3.3.3.713t-.3.712L7.825 11H19q.425 0 .713.288T20 12t-.288.713T19 13z"/>
                                                 </svg>
                                             </button>
                                         </div>
-                                        Kelas Belajar
-                                        <p class="text-sm text-gray-600 dark:text-gray-300">Silahkah pilih kelas belajar
-                                            yang anda inginkan.</p>
+                                        <div class="">
+                                            <h5 class="text-xl font-medium text-gray-900 dark:text-white">Kelas Belajar</h5>
+                                            <p class="text-sm text-gray-600 dark:text-gray-300">Silahkah pilih kelas belajar
+                                                yang anda inginkan.</p>
+                                        </div>
                                     </div>
                                 @elseif ($step == 3)
-                                    <div class="">
+                                    <div class="w-full">
                                         <div class="flex items-center space-x-2 justify-between w-full mb-2">
-                                            <button type="submit" class="" wire:click="prevStep">
-                                                <svg class=" inline" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            <button type="submit" class="dark:text-gray-300 text-gray-600" wire:click="prevStep">
+                                                <svg class=" inline -mt-1" xmlns="http://www.w3.org/2000/svg" width="24"
                                                      height="24" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                           d="m7.825 13l4.9 4.9q.3.3.288.7t-.313.7q-.3.275-.7.288t-.7-.288l-6.6-6.6q-.15-.15-.213-.325T4.426 12t.063-.375t.212-.325l6.6-6.6q.275-.275.688-.275t.712.275q.3.3.3.713t-.3.712L7.825 11H19q.425 0 .713.288T20 12t-.288.713T19 13z"/>
@@ -423,25 +406,27 @@ $pay = function () {
                                                     Belajar</p>
                                             </button>
                                             <button type="submit"
-                                                    class="{{ $this->participant->payment == 'unpaid' ? 'opacity-50 cursor-not-allowed' : '' }}"
-                                                    wire:click="nextStep" @disabled($this->participant->payment == 'unpaid')>
+                                                    class="{{ ($this->participant->payment ?? 'unpaid') == 'unpaid' ? 'opacity-50 cursor-not-allowed dark:text-gray-300 text-gray-600' : 'dark:text-gray-300 text-gray-600' }}"
+                                                    wire:click="nextStep"@disabled(!$this->participant || $this->participant->payment == 'unpaid')>
                                                 <p class="text-sm text-gray-600 dark:text-gray-300 inline">
                                                     Selesai</p>
-                                                <svg class="rotate-180 inline" xmlns="http://www.w3.org/2000/svg"
+                                                <svg class="rotate-180 inline -mt-1" xmlns="http://www.w3.org/2000/svg"
                                                      width="24" height="24" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                           d="m7.825 13l4.9 4.9q.3.3.288.7t-.313.7q-.3.275-.7.288t-.7-.288l-6.6-6.6q-.15-.15-.213-.325T4.426 12t.063-.375t.212-.325l6.6-6.6q.275-.275.688-.275t.712.275q.3.3.3.713t-.3.712L7.825 11H19q.425 0 .713.288T20 12t-.288.713T19 13z"/>
                                                 </svg>
                                             </button>
                                         </div>
-                                        Pembayaran
+                                        <div>
+
+                                        <h5 class="text-xl font-medium text-gray-900 dark:text-white">Pembayaran</h5>
                                         <p class="text-sm text-gray-600 dark:text-gray-300">Silahkan pilih metode
                                             pembayaran.</p>
+                                        </div>
                                     </div>
                                 @elseif ($step == 4)
-                                    <div class="flex items-center space-x-2 justify-between w-full">
                                         <div>
-                                            Pendaftaran Selesai
+                                            <h5 class="text-xl font-medium text-gray-900 dark:text-white">Pendaftaran Selesai</h5>
                                             <p class="text-sm text-gray-600 dark:text-gray-300">Selamat anda berhasil melakukan pendaftaran.</p>
                                         </div>
                                         <div class="flex items-center space-x-2 justify-end w-1/2 mb-2">
@@ -450,7 +435,6 @@ $pay = function () {
                                                 <p class="text-sm text-gray-600 dark:text-gray-300 inline">Cetak Bukti</p>
                                             </a>
                                         </div>
-                                    </div>
                                 @endif
                             </x-slot>
                             <div x-data="{ step: $wire.entangle('step').live }" class="mb-3">
@@ -462,7 +446,7 @@ $pay = function () {
                                      x-transition:leave="transition ease-in duration-300"
                                      x-transition:leave-start="opacity-100 scale-100"
                                      x-transition:leave-end="opacity-0 scale-90">
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 mb-2">
                                         <x-form.input label="Nomor KTP" id="ktp_number" name="ktp_number" required
                                                       maxlength="16" wire:model="ktp_number"/>
                                         <x-form.input label="Nama Lengkap" id="full_name" name="full_name" required
@@ -475,47 +459,47 @@ $pay = function () {
                                             <option value="F">Perempuan</option>
                                         </x-form.input-select>
                                     </div>
-                                    <div class="justify-between flex space-x-2">
+                                    <div class="justify-between flex space-x-2 mb-2">
                                         <x-form.input label="Tanggal Lahir" id="birth_date" name="birth_date"
                                                       type="date" required main-class="w-full" wire:model="birth_date"/>
                                         <x-form.input label="Tempat Lahir" id="birth_place" name="birth_place" required
                                                       main-class="w-full" wire:model="birth_place"/>
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="mb-2">
                                         <x-form.input label="Alamat" id="address" name="address" required
                                                       main-class="w-full" wire:model="address"/>
                                     </div>
-                                    <div class="mb-4 flex justify-between space-x-2">
+                                    <div class=" flex justify-between space-x-2 mb-2">
                                         <x-form.input label="RT" id="rt" name="rt" required main-class="w-full"
                                                       wire:model="rt"/>
                                         <x-form.input label="RW" id="rw" name="rw" required main-class="w-full"
                                                       wire:model="rw"/>
                                     </div>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2">
-                                        <x-form.input-select label="Provinsi" id="province" name="province"
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2 mb-2">
+                                        <x-form.input-select label="Provinsi" id="province_id" name="province_id"
                                                              get-data="server" :data="$this->provinces" required
                                                              wire:model.live="province_id"/>
-                                        <x-form.input-select label="Kota" id="city" name="city" get-data="server"
+                                        <x-form.input-select label="Kota" id="regency_id" name="regency_id" get-data="server"
                                                              required wire:model.live="regency_id"
                                                              :data="$this->cities"/>
-                                        <x-form.input-select label="Kecamatan" id="district" name="district" required
+                                        <x-form.input-select label="Kecamatan" id="district_id" name="district_id" required
                                                              wire:model.live="district_id" get-data="server"
                                                              :data="$this->districts"/>
-                                        <x-form.input-select label="Kelurahan" id="sub_district" name="sub_district"
+                                        <x-form.input-select label="Kelurahan" id="sub_district_id" name="sub_district_id"
                                                              required wire:model.live="sub_district_id"
                                                              get-data="server" :data="$this->sub_districts"/>
                                     </div>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 mb-2">
                                         <x-form.input label="Status Perkawinan" id="marital_status"
                                                       name="marital_status" required wire:model="marital_status"/>
                                         <x-form.input label="Pekerjaan" id="occupation" name="occupation" required
                                                       wire:model="occupation"/>
-                                        <x-form.input-select label="Agama" id="religion" name="religion"
+                                        <x-form.input-select label="Agama" id="religion_id" name="religion_id"
                                                              mainClass="sm:col-span-2 xl:col-span-1" get-data="server"
                                                              :data="$this->religions" required
                                                              wire:model.live="religion_id"/>
                                     </div>
-                                    <div class="mb-4 flex justify-between items-center space-x-2">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 ">
                                         <x-form.input label="Kewarganegaraan" id="nationality" name="nationality"
                                                       required main-class="w-full" wire:model="nationality"/>
                                         <x-form.input-select label="Golongan Darah" id="blood_type" name="blood_type"
@@ -630,7 +614,7 @@ $pay = function () {
                                                     - {{ \Carbon\Carbon::parse($this->complete_course)->locale('id')->isoFormat('DD MMMM YYYY') }}</p>
                                             </div>
                                         </div>
-                                        @if($this->participant->payment == 'unpaid')
+                                        @if(!$this->participant || $this->participant->payment == 'unpaid' || $this->participant->payment === null)
                                             <button wire:click="pay" wire:loading.attr="disabled"  type="button"
                                                     class="xl:col-span-2 w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 transition duration-200 items-center">
                                                 <div class="relative w-full" wire:loading wire:target="pay">
@@ -696,12 +680,12 @@ $pay = function () {
                                             <div class="border-t-2 border-gray-300 dark:border-gray-700 my-4"></div>
                                             <div class="flex justify-between">
                                                 <p class="text-sm text-gray-600 dark:text-gray-300">Order ID</p>
-                                                <p class="text-sm text-gray-600 dark:text-gray-300">#{{ $this->participant->order }}</p>
+                                                <p class="text-sm text-gray-600 dark:text-gray-300">#{{ $this->participant->order ?? '' }}</p>
                                             </div>
                                             <div class="border-t-2 border-gray-300 dark:border-gray-700 my-4"></div>
                                             <div class="flex justify-between">
                                                 <p class="text-sm text-gray-600 dark:text-gray-300">Pembayaran</p>
-                                                <p class="text-sm text-gray-100 dark:text-gray-300 bg-green-500 px-3">{{ $this->participant->payment == 'unpaid' ? 'Belum Lunas' : 'Lunas' }}</p>
+                                                <p class="text-sm text-gray-100 dark:text-gray-300 bg-green-500 px-3">{{ ($this->participant->payment ?? 'unpaid') == 'unpaid' ? 'Belum Lunas' : 'Lunas' }}</p>
                                             </div>
                                             <div class="border-t-2 border-gray-300 dark:border-gray-700 my-4"></div>
                                             <div class="flex justify-between">
@@ -777,16 +761,10 @@ $pay = function () {
         </div>
     @endif
 
-    @pushonce('script')
-        @assets
-        <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
-                data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
-        @endassets
-    @endpushonce
-
     @pushonce('scripts')
+        <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
         <script type="text/javascript">
-            document.addEventListener('livewire:init', () => {
+            document.addEventListener('livewire:navigated', () => {
                 Livewire.on('snap-token', (data) => {
                     window.snap.pay(data.snap, {
                         onSuccess: function (result) {
@@ -808,7 +786,7 @@ $pay = function () {
                                     return response.json();
                                 })
                                 .then(data => {
-                                    window.location.reload();
+                                    Livewire.navigate(@js(route('participant.registration')))
                                 })
                                 .catch(error => {
                                     console.error('Error:', error);
@@ -825,7 +803,8 @@ $pay = function () {
                         }
                     });
                 });
-            });
+
+            }, { once: true });
         </script>
     @endpushonce
 

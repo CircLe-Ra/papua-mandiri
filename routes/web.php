@@ -21,15 +21,18 @@ Route::middleware('auth')->group(function () {
     Volt::route('master-data/religions', 'pages.admin.master-data.religion')->name('admin.master-data.religion');
     Volt::route('receptions', 'pages.admin.reception.reception')->name('admin.reception');
     Volt::route('receptions/{period}/add-program', 'pages.admin.reception.opening')->name('admin.reception.opening');
-    Volt::route('participants/receptions', 'pages.admin.participant.reception')->name('admin.participants');
+    Volt::route('participant', 'pages.admin.participant.participant')->name('admin.participants');
     Volt::route('participant/receptions/{id}/detail', 'pages.admin.participant.participant')->name('admin.participant.details');
     Volt::route('participant/absenteeism', 'pages.admin.participant.absenteeism')->name('admin.participant.absenteeism');
-    Volt::route('participant/absenteeism/{id}/detail', 'pages.admin.participant.absenteeism.program')->name('admin.participant.absenteeism.detail');
+    Volt::route('participant/absenteeism/reception/{reception}/program/{program}', 'pages.admin.participant.absenteeism.participant')->name('admin.participant.absenteeism.detail');
 
     //peserta
     Volt::route('registration', 'pages.participant.registration')->name('participant.registration');
     Route::post('registration/success', [PaymentController::class, '__invoke'])->name('participant.registration.success');
     Route::get('registration/report/{id}/print', [ReportController::class, 'registration'])->name('participant.registration.report.print');
+
+    //pimpinan
+    Volt::route('report/absent', 'pages.leader.absenteeism')->name('report.absenteeism');
 });
 
 

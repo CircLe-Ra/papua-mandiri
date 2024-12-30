@@ -10,20 +10,6 @@
     <link href="{{ asset('3party/filepond/filepond.css') }}" rel="stylesheet">
     <link href="{{ asset('3party/filepond/filepond-plugin-image-preview.css') }}" rel="stylesheet">
     <style>
-        /* Default light theme styles */
-        .filepond--panel-root {
-            background-color: oklch(var(--b2));
-
-            /* ... other styles ... */
-        }
-
-        .filepond--drop-label.filepond--drop-label label {
-            color: oklch(var(--bc));
-        }
-
-        /* ... other default light theme styles ... */
-
-        /* Dark theme styles */
         .dark .filepond--panel-root {
             background-color: #333;
             /* Dark background for the panel */
@@ -33,11 +19,6 @@
         .dark .filepond--drop-label {
             color: #ddd;
             /* Lighter text color for dark mode */
-        }
-
-        .dark .filepond--label-action {
-            text-decoration-color: oklch(var(--n));
-            /* Lighter underline color for "Browse" button */
         }
 
         .dark .filepond--item-panel {
@@ -101,6 +82,7 @@
         </div>
 
         <script>
+
             document.addEventListener('livewire:navigated', function () {
                 let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
                 let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
@@ -110,10 +92,12 @@
                 }
                 if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                     themeToggleCheckbox.checked = true;
-                    themeToggleLightIcon.classList.remove('hidden');
-                } else {
-                    themeToggleCheckbox.checked = false;
                     themeToggleDarkIcon.classList.remove('hidden');
+                    themeToggleLightIcon.classList.add('hidden');
+                } else {
+                    themeToggleDarkIcon.classList.add('hidden');
+                    themeToggleLightIcon.classList.remove('hidden');
+                    themeToggleCheckbox.checked = false;
                 }
                 const toggleDarkMode = () => {
                     if (themeToggleCheckbox.checked) {
@@ -129,8 +113,7 @@
                     }
                 };
                 themeToggleCheckbox.addEventListener('change', toggleDarkMode);
-            });
-
+            }, { once: true });
         </script>
 
         <x-toaster-hub />
@@ -138,11 +121,6 @@
     <script src="{{ asset('3party/filepond/filepond-plugin-file-validate-size.js') }}"></script>
     <script src="{{ asset('3party/filepond/filepond-plugin-image-preview.js') }}"></script>
     <script src="{{ asset('3party/filepond/filepond.js') }}"></script>
-    <script>
-        FilePond.registerPlugin(FilePondPluginFileValidateType);
-        FilePond.registerPlugin(FilePondPluginFileValidateSize);
-        FilePond.registerPlugin(FilePondPluginImagePreview);
-    </script>
     @stack('scripts')
 </body>
 </html>

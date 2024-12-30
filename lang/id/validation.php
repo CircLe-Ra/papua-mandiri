@@ -297,5 +297,11 @@ return [
         'religion_id'              => 'agama',
         'nationality'              => 'kewarganegaraan',
         'blood_type'               => 'golongan darah',
+        'meeting'                  => 'pertemuan',
+        'period_id'                => 'periode',
+        'reception_id'             => 'penerimaan',
+        'time_id'                  => 'waktu',
+        'program_id'               => 'program',
+        'certificate'              => 'sertifikat',
     ],
 ];

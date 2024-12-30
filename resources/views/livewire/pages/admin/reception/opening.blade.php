@@ -10,24 +10,20 @@ use Illuminate\Validation\Rule;
 layout('layouts.app');
 usesPagination();
 state(['reception' => fn($period) => Reception::where('id', $period)->first()]);
-state(['id', 'program_id']);
+state(['id', 'program_id', 'meeting ']);
 state(['show' => 5, 'search' => null])->url();
-
-
 
 $programs = computed(function () {
     return Program::all();
 });
 
 $openings = computed(function () {
-
     return Opening::whereHas('program', function ($query) {
         $query->where('name', 'like', '%' . $this->search . '%');
         })->where('reception_id', $this->reception->id)
         ->latest()
         ->paginate($this->show, pageName: 'openings-page');
 });
-
 
 on(['refresh' => function () {
     $this->openings = Opening::whereHas('program', function ($query) {
@@ -47,12 +43,13 @@ $store = function () {
                                                         ->where('program_id', $this->program_id);
                                                     }),
                                                 ],
+        'meeting' => ['required'],
     ]);
     $validate['reception_id'] = $this->reception->id;
     try {
         Opening::updateOrCreate(['id' => $this->id], $validate);
         unset($this->receptions);
-        $this->reset(['program_id', 'id']);
+        $this->reset(['program_id', 'id', 'meeting']);
         $this->dispatch('refresh');
         Toaster::success('Program berhasil ditambahkan');
     } catch (\Exception $e) {
@@ -78,6 +75,7 @@ $edit = function ($id){
     $opening = Opening::find($id);
     $this->id = $opening->id;
     $this->program_id = $opening->program_id;
+    $this->meeting = $opening->meeting;
 };
 
 
@@ -109,10 +107,11 @@ $edit = function ($id){
         <div class="w-full col-span-3 lg:col-span-1">
             <x-card class="mt-2" >
                 <x-slot name="header">
-                Pembukaan Program Pembelajaran
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Pembukaan Program Pembelajaran</h5>
                 </x-slot>
                 <form wire:submit="store" class="max-w-sm mx-auto">
-                    <x-form.input-select main-class="mb-5" id="program_id" name="program_id" wire:model="program_id" size="md" get-data="server" :data="$this->programs" label="Program" :disabled="$this->id"/>
+                    <x-form.input-select main-class="mb-2" id="program_id" name="program_id" wire:model="program_id" size="md" get-data="server" :data="$this->programs" label="Program" :disabled="$this->id"/>
+                    <x-form.input type="number" id="meeting" name="meeting" wire:model="meeting" main-class="mb-5" label="Pertemuan" placeholder="Masukan Jumlah Pertemuan"/>
                     <div class="flex justify-end space-x-2">
                         <x-button type="reset" color="light">
                             Batal
@@ -127,7 +126,7 @@ $edit = function ($id){
         <div class="col-span-2 ">
             <x-card class="mt-2 w-full ">
                 <x-slot name="header">
-                    Daftar Program Pembelajaran Periode {{ $this->reception->period }}
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Daftar Program Pembelajaran Periode {{ $this->reception->period }}</h5>
                 </x-slot>
                 <x-slot name="sideHeader">
                     <x-form.input-select id="show" name="show" wire:model.live="show" size="xs" class="w-full">
@@ -140,7 +139,7 @@ $edit = function ($id){
                     </x-form.input-select>
                 </x-slot>
 
-                <x-table thead="#, Program, Dibuat">
+                <x-table thead="#, Program, Pertemuan, Dibuat">
                     @if($this->openings->count() > 0)
                         @foreach($this->openings as $opening)
                             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
@@ -149,6 +148,9 @@ $edit = function ($id){
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $opening->program->name }}
+                                </td>
+                                <td class="px-6 py-4 text-nowrap">
+                                    {{ $opening->meeting ?? 0 }} Pertemuan
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $opening->created_at->diffForHumans() }}

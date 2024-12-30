@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('reception_id')->constrained('receptions')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete()->cascadeOnUpdate();
             $table->enum('level', [1,2,3]);
-            $table->enum('status', ['registration', 'proceed', 'complete'])->default('registration');
+            $table->enum('status', ['registration', 'proceed', 'complete','incomplete', 'cancel'])->default('registration');
             $table->enum('payment', ['paid', 'unpaid'])->default('unpaid');
             $table->float('amount')->default(0);
             $table->text('certificate')->nullable();

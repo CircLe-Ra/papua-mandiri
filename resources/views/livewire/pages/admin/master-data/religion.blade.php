@@ -76,11 +76,11 @@ $edit = function ($id){
         <div class="w-full col-span-3 lg:col-span-1">
             <x-card class="mt-2">
                 <x-slot name="header">
-                    Tambah Agama
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Tambah Agama</h5>
                 </x-slot>
                 <form wire:submit="store" class="max-w-sm mx-auto">
                     <x-form.input id="name" name="name" wire:model="name" label="Nama Agama"
-                                  placeholder="Masukan Nama Agama"/>
+                                  placeholder="Masukan Nama Agama" main-class="mb-5"/>
                     <div class="flex justify-end space-x-2">
                         <x-button type="reset" color="light">
                             Batal
@@ -95,7 +95,7 @@ $edit = function ($id){
         <div class="col-span-2">
             <x-card class="mt-2 w-full">
                 <x-slot name="header">
-                    Daftar Agama
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Daftar Agama</h5>
                 </x-slot>
                 <x-slot name="sideHeader">
                     <x-form.input-select id="show" name="show" wire:model.live="show" size="xs" class="w-full">

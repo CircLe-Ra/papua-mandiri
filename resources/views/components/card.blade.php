@@ -4,8 +4,8 @@
 <div {{ $attributes->merge(['class' => ' p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700']) }}>
     <div class="space-y-6">
         @isset($header)
-            <div class="flex justify-between items-center">
-                <h5 {{ $header->attributes->merge(['class' => 'text-xl font-medium text-gray-900 dark:text-white']) }}>{{ $header ?? 'header' }}</h5>
+            <div {{ $header->attributes->class(['flex justify-between items-center']) }}>
+                {{ $header ?? 'header' }}
                 @isset($sideHeader)
                     {{ $sideHeader }}
                 @endisset

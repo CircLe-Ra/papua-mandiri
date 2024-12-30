@@ -6,7 +6,7 @@ use Masmerise\Toaster\Toaster;
 
 layout('layouts.app');
 usesPagination();
-state(['name', 'id', 'amount']);
+state(['name', 'id', 'amount', 'meeting']);
 state(['show' => 5, 'search' => null])->url();
 
     $programs = computed(function () {
@@ -28,15 +28,15 @@ state(['show' => 5, 'search' => null])->url();
     $store = function () {
         $this->validate([
             'name' => 'required|unique:programs,name' . ($this->id ? ',' . $this->id : ''),
-            'amount' => 'required'
+            'amount' => 'required',
         ]);
         try {
             Program::updateOrCreate(['id' => $this->id], [
                 'name' => $this->name,
-                'amount' => preg_replace('/[^0-9]/', '', $this->amount)
+                'amount' => preg_replace('/[^0-9]/', '', $this->amount),
             ]);
             unset($this->programs);
-            $this->reset(['name', 'id','amount']);
+            $this->reset(['name', 'id','amount', 'meeting']);
             $this->dispatch('refresh');
             Toaster::success('Program berhasil disimpan');
         } catch (\Exception $e) {
@@ -92,10 +92,10 @@ state(['show' => 5, 'search' => null])->url();
         <div class="w-full col-span-3 lg:col-span-1">
             <x-card class="mt-2" >
                 <x-slot name="header">
-                    Tambah Program
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Tambah Program</h5>
                 </x-slot>
                 <form wire:submit="store" class="max-w-sm mx-auto">
-                    <x-form.input id="name" name="name" wire:model="name" label="Nama" placeholder="Masukan Nama Program"/>
+                    <x-form.input id="name" name="name" wire:model="name" main-class="mb-2" label="Nama" placeholder="Masukan Nama Program"/>
                     <div x-data="{
                             amount: @entangle('amount') || '0',
                             formatRupiah(value) {
@@ -114,7 +114,7 @@ state(['show' => 5, 'search' => null])->url();
                     <x-form.input
                         x-model="amount"
                         x-on:input="updateFormattedValue($event)"
-                        id="amount" name="amount" wire:model.live="amount" label="Harga" placeholder="Masukan Harga Program"/>
+                        id="amount" name="amount" wire:model.live="amount" label="Harga" placeholder="Masukan Harga Program" main-class="mb-5"/>
                     </div>
                     <div class="flex justify-end space-x-2">
                         <x-button type="reset" color="light">
@@ -130,7 +130,7 @@ state(['show' => 5, 'search' => null])->url();
         <div class="col-span-2 ">
             <x-card class="mt-2 w-full ">
                     <x-slot name="header">
-                        Daftar Program
+                        <h5 class="text-xl font-medium text-gray-900 dark:text-white"> Daftar Program</h5>
                     </x-slot>
                     <x-slot name="sideHeader">
                         <x-form.input-select id="show" name="show" wire:model.live="show" size="xs" >
@@ -153,13 +153,13 @@ state(['show' => 5, 'search' => null])->url();
                                 <td class="px-6 py-4">
                                     {{ $program->name }}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 text-nowrap">
                                     Rp {{ number_format($program->amount, 0, ',', '.') }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $program->created_at->diffForHumans() }}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 text-nowrap">
                                     <x-button color="yellow" wire:click="edit({{ $program->id }})">
                                         Edit
                                     </x-button>
@@ -171,7 +171,7 @@ state(['show' => 5, 'search' => null])->url();
                         @endforeach
                     @else
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                            <td class="px-6 py-4 text-center" colspan="4">
+                            <td class="px-6 py-4 text-center" colspan="6">
                                 Tidak ada data
                             </td>
                         </tr>

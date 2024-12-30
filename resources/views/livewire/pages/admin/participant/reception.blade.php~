@@ -35,25 +35,10 @@ $receptions = computed(function () {
         <div class="col-span-3 ">
             <x-card class="mt-2 w-full ">
                 <x-slot name="header">
-                    Peserta Kurusus
-                    <p class="text-sm text-gray-600 dark:text-gray-300">Klik pada area manapun didalam kotak untuk melihat peserta kursus.</p>
+                    Peserta Kursus
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Daftar peserta berikut berdasarkan periode aktif {{ \Carbon\Carbon::parse($this->start_course)->locale('id')->isoFormat('DD MMMM YYYY') }} sampai {{ \Carbon\Carbon::parse($this->complete_course)->locale('id')->isoFormat('DD MMMM YYYY') }}.</p>
                 </x-slot>
-                <div x-data x-init="
-                    window.addEventListener('livewire:navigated', () => {
-                        $nextTick(() => {
-                            $el.querySelector('div#open-participant-button').click();
-                        });
-                    }, { once: true });
-                ">
-                    <div @click="$dispatch('open-modal', { id : 'open-participant' })" id="open-participant-button"
-                        class="relative mt-2 border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-lg pb-[34%] w-full">
-                        <div class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center">
-                            <div class="text-center text-white font-bold">
-                                Klik disini.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </x-card>
         </div>
     </div>
