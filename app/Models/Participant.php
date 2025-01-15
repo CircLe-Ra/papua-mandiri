@@ -18,4 +18,9 @@ class Participant extends Model
         return $this->belongsTo(Program::class);
     }
 
+    public function reception()
+    {
+        return $this->belongsTo(Reception::class);
+    }
+
 }

@@ -148,7 +148,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a  wire:navigate href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <a wire:navigate href="{{ route('participant.certificate.download') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('participant.certificate.download') ? 'bg-gray-100 dark:bg-gray-700' : '' }}">
                         <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M19 11V8.2c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C17.48 5 16.92 5 15.8 5H7.2c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C4 6.52 4 7.08 4 8.2v5.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874C5.52 17 6.08 17 7.2 17H14m-6-4h4M8 9h7"/><circle cx="18" cy="15" r="1"/><path stroke-linecap="round" d="M20 20s-.5-1-2-1s-2 1-2 1"/></g></svg>
                     <span class="flex-1 ms-3 whitespace-nowrap">Sertifikat</span>
                     </a>

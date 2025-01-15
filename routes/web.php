@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Volt::route('registration', 'pages.participant.registration')->name('participant.registration');
     Route::post('registration/success', [PaymentController::class, '__invoke'])->name('participant.registration.success');
     Route::get('registration/report/{id}/print', [ReportController::class, 'registration'])->name('participant.registration.report.print');
+    Volt::route('certificate/download', 'pages.participant.certificate')->name('participant.certificate.download');
+
 
     //pimpinan
     Volt::route('report/absent', 'pages.leader.absenteeism')->name('report.absenteeism');

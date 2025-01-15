@@ -12,4 +12,10 @@ class Reception extends Model
     {
         return $this->hasMany(Opening::class);
     }
+
+    public function participants()
+    {
+        return $this->hasMany(Participant::class);
+    }
+
 }
