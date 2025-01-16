@@ -16,6 +16,9 @@ state(['show' => 5, 'search' => null])->url();
 
 mount(function () {
     $this->reception = Reception::where('status', 'active')->first();
+    if ($this->reception == null) {
+        return $this->redirect('information', navigate: true);
+    }
 });
 
 $periods = computed(function () {

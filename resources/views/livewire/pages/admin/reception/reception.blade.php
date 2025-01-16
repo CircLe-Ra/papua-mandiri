@@ -150,10 +150,10 @@ $changeStatus = function ($id, $status) {
                                     {{ $reception->period }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ \Carbon\Carbon::parse($reception->start_course)->format('d/m/Y') }}
+                                    {{ \Carbon\Carbon::parse($reception->start_course ?? '0000-00-00')->format('d/m/Y') }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ \Carbon\Carbon::parse($reception->complete_course)->format('d/m/Y') }}
+                                    {{ \Carbon\Carbon::parse($reception->complete_course ?? '0000-00-00')->format('d/m/Y') }}
                                 </td>
                                 <td class="px-6 py-4">
                                    <button id="dropdownStatus{{ $key }}" data-dropdown-toggle="dropdown-status{{ $key }}"  data-dropdown-placement="right-end" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-1.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full relative" type="button">
@@ -192,7 +192,7 @@ $changeStatus = function ($id, $status) {
                         @endforeach
                     @else
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                            <td class="px-6 py-4 text-center" colspan="5">
+                            <td class="px-6 py-4 text-center" colspan="6">
                                 Tidak ada data
                             </td>
                         </tr>

@@ -28,6 +28,9 @@ boot(function () {
 });
 mount(function () {
     $this->reception = Reception::where('status', 'active')->first();
+    if ($this->reception == null) {
+        return $this->redirect(route('information'), navigate: true);
+    }
     $this->start_course = $this->reception->start_course ?? '0000-00-00';
     $this->complete_course = $this->reception->complete_course ?? '0000-00-00';
     $this->participant = Participant::where('user_id', auth()->user()->id)->where('reception_id', $this->reception->id)->first();

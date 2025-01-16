@@ -17,6 +17,7 @@ Route::view('profile', 'profile')
 
 Route::middleware('auth')->group(function () {
     //admin
+    Volt::route('admin/dashboard', 'pages.admin.dashboard')->name('admin.dashboard');
     Volt::route('master-data/programs', 'pages.admin.master-data.program')->name('admin.master-data.program');
     Volt::route('master-data/religions', 'pages.admin.master-data.religion')->name('admin.master-data.religion');
     Volt::route('receptions', 'pages.admin.reception.reception')->name('admin.reception');
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
     //peserta
     Volt::route('registration', 'pages.participant.registration')->name('participant.registration');
+    Volt::route('information', 'pages.information')->name('information');
     Route::post('registration/success', [PaymentController::class, '__invoke'])->name('participant.registration.success');
     Route::get('registration/report/{id}/print', [ReportController::class, 'registration'])->name('participant.registration.report.print');
     Volt::route('certificate/download', 'pages.participant.certificate')->name('participant.certificate.download');
