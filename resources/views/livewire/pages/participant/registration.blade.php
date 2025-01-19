@@ -530,7 +530,7 @@ $pay = function () {
                                                       name="complete_course" required wire:model="complete_course"
                                                       :disabled="true"/>
                                     </div>
-                                    <div class="justify-between flex space-x-2">
+                                    <div class="justify-between flex space-x-2 mt-2">
                                         <x-form.input-select label="Program Belajar" id="program_id" name="program_id"
                                                              type="date" :required="$this->step === 2"
                                                              main-class="w-full" wire:model="program_id"

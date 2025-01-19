@@ -115,7 +115,7 @@ $total_meeting = function ($program_id) {
                 Batal
             </x-button>
             <x-button type="submit" color="blue" wire:loading.attr="disabled" wire:loading.class="cursor-not-allowed" wire:target="find,reception_id" wire:click="find">
-                Simpan
+                Tampilkan
             </x-button>
         </x-slot>
     </x-modal>
