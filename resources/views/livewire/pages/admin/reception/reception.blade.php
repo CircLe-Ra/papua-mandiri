@@ -26,7 +26,7 @@ on(['refresh' => function () {
 
 $store = function () {
     $this->validate([
-        'period' => 'required|integer',
+        'period' => 'required|integer|min_digits:4|max_digits:4',
         'start_course' => 'required|date|before:complete_course',
         'complete_course' => 'required|date|after:start_course'
     ]);
@@ -109,7 +109,7 @@ $changeStatus = function ($id, $status) {
                     <h5 class="text-xl font-medium text-gray-900 dark:text-white">Tambah Periode</h5>
                 </x-slot>
                 <form wire:submit="store" class="max-w-sm mx-auto">
-                    <x-form.input type="number" id="period" name="period" wire:model="period" label="Nama" placeholder="Masukan Periode" main-class="mb-2"/>
+                    <x-form.input type="number" id="period" name="period" wire:model="period" label="Tahun" placeholder="Masukan Periode" main-class="mb-2"/>
                     <x-form.input type="date" id="start_course" name="start_course" wire:model="start_course" label="Mulai Kursus" main-class="mb-2"/>
                     <x-form.input type="date" id="complete_course" name="complete_course" wire:model="complete_course" label="Selesai Kursus" main-class="mb-5"/>
                     <div class="flex justify-end space-x-2">

@@ -29,6 +29,7 @@ $store = function () {
     ]);
 
     try {
+
         if ($this->idData) {
             $user = User::find($this->idData);
             $data = [
@@ -39,7 +40,9 @@ $store = function () {
                 $data['password'] = bcrypt($this->password);
             }
             $user->update($data);
-            $user->removeRole($user->roles->first()->name);
+            if (!$user->roles->first() == null) {
+                $user->removeRole($user->roles->first()->name);
+            }
             $user->assignRole($this->role_name);
             unset($this->users);
             $this->reset(['name', 'email', 'password', 'role_name', 'idData']);
@@ -51,7 +54,7 @@ $store = function () {
                 'email' => $this->email,
                 'password' => bcrypt($this->password),
             ]);
-            $user->syncRoles([$this->role_name]);
+            $user->assignRole($this->role_name);
             unset($this->users);
             $this->reset(['name', 'email', 'password', 'role_name', 'idData']);
             $this->dispatch('refresh');
@@ -110,7 +113,7 @@ $destroy = function ($id) {
         <div class="w-full col-span-3 lg:col-span-1">
             <x-card class="mt-2">
                 <x-slot name="header">
-                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">{{ __('Tambah User') }}</h5>
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">{{ __('Tambah Pengguna') }}</h5>
                 </x-slot>
                 <form wire:submit="store" class="max-w-sm mx-auto">
                     <input type="hidden" wire:model="idData">
@@ -140,7 +143,7 @@ $destroy = function ($id) {
         <div class="col-span-2">
             <x-card class="mt-2 w-full">
                 <x-slot name="header">
-                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">{{ __('Daftar User') }}</h5>
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">{{ __('Daftar Pengguna') }}</h5>
                 </x-slot>
                 <x-slot name="sideHeader">
                     <x-form.input-select id="show" name="show" wire:model.live="showing" size="xs">

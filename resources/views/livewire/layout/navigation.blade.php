@@ -108,7 +108,7 @@
                             <a wire:navigate href="{{ route('admin.master-data.religion') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ request()->routeIs('admin.master-data.religion') ? 'font-bold' : '' }}">Data Agama</a>
                         </li>
                         <li>
-                            <a wire:navigate href="{{ route('admin.master-data.user') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ request()->routeIs('admin.master-data.user') ? 'font-bold' : '' }}">Data User</a>
+                            <a wire:navigate href="{{ route('admin.master-data.user') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ request()->routeIs('admin.master-data.user') ? 'font-bold' : '' }}">Data Pengguna</a>
                         </li>
                         <li>
                             <a wire:navigate href="{{ route('admin.master-data.role') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ request()->routeIs('admin.master-data.role') ? 'font-bold' : '' }}">Data Role</a>
