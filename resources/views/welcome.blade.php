@@ -21,7 +21,7 @@
     <livewire:welcome.navigation />
 </header>
 
-<section class="bg-white dark:bg-gray-900">
+<section class="bg-white dark:bg-gray-900" id="home">
     <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div class="place-self-center mr-auto lg:col-span-7">
             <h1 class="mb-4 max-w-2xl text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl dark:text-white">Membangun Masa Depan Papua yang Mandiri dan Sejahtera</h1>
@@ -37,24 +37,26 @@
     </div>
 </section>
 
-<section class="bg-white dark:bg-gray-900">
+<section class="bg-white dark:bg-gray-900" >
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-12">
         <h2 class="mb-8 text-3xl font-extrabold tracking-tight leading-tight text-center text-gray-900 lg:mb-16 dark:text-white md:text-4xl">Donatur Kami</h2>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-gray-500 dark:text-gray-400">
             <a href="https://www.kopernik.info" class="flex justify-center items-center">
-                <img class="h-7 hover:text-gray-900 dark:hover:text-white" src="{{ asset('img/kopernik.png') }}" />
+                <img class="h-7 hidden dark:block" src="{{ asset('img/kopernik.png') }}" alt="kopernik" />
+                <img class="h-7 dark:hidden block" src="{{ asset('img/kopernik-dark.png') }}" alt="kopernik" />
             </a>
             <a href="https://hapin.nl" class="flex justify-center items-center">
-                <img class="h-7 hover:text-gray-900 dark:hover:text-white" src="{{ asset('img/hapin.png') }}" />
+                <img class="h-16" src="{{ asset('img/hapin.png') }}" alt="hapin" />
             </a>
             <a href="https://pjns.nl" class="flex justify-center items-center">
-                <img class="h-16 hover:text-gray-900 dark:hover:text-white" src="{{ asset('img/pjns.png') }}" />
+                <img class="h-16 hidden dark:block" src="{{ asset('img/pjns.png') }}" alt="pjns" />
+                <img class="h-16 block dark:hidden" src="{{ asset('img/pjns_dark.png') }}" alt="pjns" />
             </a>
         </div>
     </div>
 </section>
 
-<section class="bg-gray-50 dark:bg-gray-800">
+<section class="bg-gray-50 dark:bg-gray-800" id="about">
     <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
         <div class="mb-4 max-w-screen-md lg:mb-8">
             <span class="block mb-2 text-sm font-medium text-blue-600 dark:text-blue-500">Tentang</span>
@@ -68,17 +70,15 @@
                 </p>
 
             </div>
-            <div>
+            <div class="">
                 <img src="{{ asset('img/papua-mandiri.jpg') }}" alt="papua mandiri" />
             </div>
         </div>
     </div>
 </section>
 
-<section class="bg-white dark:bg-gray-900">
-
+<section class="bg-white dark:bg-gray-900" id="vision_mission">
     <div class="gap-16  py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
-
         <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
             <span class="block mb-2 text-sm font-medium text-blue-600 dark:text-blue-500">Visi & Misi</span>
             <h2 class="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">Visi</h2>
@@ -99,16 +99,13 @@
     </div>
 </section>
 
-<section class="bg-gray-50 dark:bg-gray-800">
+<section class="bg-gray-50 dark:bg-gray-800" id="contact">
     <div class="gap-16  py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div>
             <p class="font-medium text-blue-600 dark:text-blue-500">Kontak</p>
-
             <h1 class="mt-2 text-2xl font-semibold text-gray-800 md:text-3xl dark:text-white">Hubungi Kami</h1>
-
             <p class="mt-3 text-gray-500 dark:text-gray-400">Tim kami yang ramah selalu siap mengobrol.</p>
         </div>
-
         <div class="grid grid-cols-1 gap-12 mt-10 md:grid-cols-2 lg:grid-cols-3">
             <div>
                 <span class="inline-block p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
@@ -176,7 +173,7 @@
                 </a>
             </div>
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2">
-                
+
                 <div>
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Ikuti Kami</h2>
                     <ul class="text-gray-600 dark:text-gray-400">

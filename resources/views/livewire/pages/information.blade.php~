@@ -18,7 +18,7 @@ layout('layouts.app');
     </x-breadcrumbs>
     <div class="relative mt-2 border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-lg pb-[43.10%] w-full">
         <div class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center">
-            <div class="text-center   font-bold">
+            <div class="text-center  text-white font-bold">
                 <svg class="w-full" xmlns="http://www.w3.org/2000/svg" width="36" height="36"
                      viewBox="0 0 36 36">
                     <path fill="#ffe8b6"
@@ -28,7 +28,7 @@ layout('layouts.app');
                     <path fill="#3b88c3"
                           d="M30 34a2 2 0 0 1-2 2H8a2 2 0 0 1 0-4h20a2 2 0 0 1 2 2m0-32a2 2 0 0 1-2 2H8a2 2 0 0 1 0-4h20a2 2 0 0 1 2 2"/>
                 </svg>
-                <p class="mt-2 dark:text-white text-gray-950 ">Pendaftaran belum dibuka untuk saat ini.</p>
+                <p class="mt-2 dark:text-gray-950">Pendaftaran belum dibuka untuk saat ini.</p>
             </div>
         </div>
     </div>

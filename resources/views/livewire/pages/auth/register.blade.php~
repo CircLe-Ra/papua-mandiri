@@ -31,7 +31,7 @@ $register = function () {
     $validated['password'] = Hash::make($validated['password']);
 
     event(new Registered($user = User::create($validated)));
-    $user->assignRole('peserta');
+    $user->assignRole($this->role_name);
     Auth::login($user);
 
     $this->redirect(route('dashboard', absolute: false), navigate: true);

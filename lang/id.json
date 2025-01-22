@@ -260,5 +260,14 @@
     "Yes": "Ya",
     "You are receiving this email because we received a password reset request for your account.": "Anda menerima surel ini karena kami menerima permintaan pengaturan ulang kata sandi untuk akun anda.",
     "You're logged in!": "Anda sudah masuk!",
-    "Your email address is unverified.": "Alamat surel Anda belum diverifikasi."
+    "Your email address is unverified.": "Alamat surel Anda belum diverifikasi.",
+    "User could not be created.": "Pengguna tidak dapat dibuat.",
+    "User has been created.": "Pengguna telah dibuat.",
+    "User has been updated.": "Pengguna telah diperbarui.",
+    "Role could not be deleted.": "Peran tidak dapat dihapus.",
+    "Role has been deleted.": "Peran telah dihapus.",
+    "Role has been created.": "Peran telah dibuat.",
+    "User has been deleted.": "Pengguna telah dihapus.",
+    "Role has been updated.": "Peran telah diperbarui.",
+    "User could not be updated.": "Pengguna tidak dapat diperbarui."
 }

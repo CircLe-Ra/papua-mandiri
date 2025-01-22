@@ -55,7 +55,8 @@ on(['close-modal' => function () {
     $this->photo = $this->participant->user->profile_photo_path;
     $this->dispatch('modal-loading-done', id: 'aborted-modal');
 }, 'open-modal-period' => function ($id) {
-    $this->dispatch('modal-loading-done', id: $id);
+    dd($id);
+    $this->dispatch('open-modal-done', id: $id);
 }]);
 
 updated(['reception_id' => function ($period) {

@@ -17,7 +17,11 @@ $login = function () {
 
     Session::regenerate();
 
-    $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+    if (Auth::user()->roles()->first()->name == 'admin' || Auth::user()->roles()->first()->name == 'pimpinan') {
+        $this->redirectIntended(default: route('admin.dashboard', absolute: false), navigate: true);
+    }else{
+        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+    }
 };
 
 ?>
