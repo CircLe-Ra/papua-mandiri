@@ -73,7 +73,7 @@
     </script>
     @stack('script')
 </head>
-<body class="bg-gray-100 dark:bg-gray-900">
+<body class="bg-neutral-100 dark:bg-gray-900">
         <livewire:layout.navigation />
         <div class="py-4 px-2  sm:ml-64">
             <div class="mt-12 rounded-lg dark:border-gray-700">

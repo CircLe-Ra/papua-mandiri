@@ -20,13 +20,13 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'admin']);
 
         User::factory()->create([
-            'name' => 'herry',
-            'email' => 'herry@admin.com',
+            'name' => 'Administrator',
+            'email' => 'admin@admin.com',
             'password' => bcrypt('123')
         ])->assignRole('admin');
 
-        // $this->call([
-        //     AdministrativeAreaSeeder::class
-        // ]);
+         $this->call([
+             AdministrativeAreaSeeder::class
+         ]);
     }
 }

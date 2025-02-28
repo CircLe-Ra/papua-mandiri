@@ -14,7 +14,7 @@
 ]" /> --}}
 
 <!-- Breadcrumb -->
-<nav class="{{ $actions != null ? 'py-3' : 'py-[18.8px]' }} mt-16 sm:mt-12 flex justify-between px-5 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700" aria-label="Breadcrumb">
+<nav class="{{ $actions != null ? 'py-3' : 'py-[18.8px]' }} mt-16 sm:mt-12 flex justify-between px-5 text-gray-700 border border-gray-200 rounded-lg bg-neutral-200 dark:bg-gray-800 dark:border-gray-700" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         @foreach ($crumbs as $crumb)
             @if (isset($crumb['href']))
