@@ -33,13 +33,13 @@ Route::middleware('auth')->group(function () {
     });
     //peserta
     Route::group(['middleware' => ['role:peserta']], function () {
-        Route::view('dashboard', 'dashboard')->name('dashboard');
+        Volt::route('dashboard', 'pages.participant.dashboard')->name('dashboard');
         Volt::route('registration', 'pages.participant.registration')->name('participant.registration');
-        Volt::route('information', 'pages.information')->name('information');
         Route::post('registration/success', [PaymentController::class, '__invoke'])->name('participant.registration.success');
         Route::get('registration/report/{id}/print', [ReportController::class, 'registration'])->name('participant.registration.report.print');
         Volt::route('certificate/download', 'pages.participant.certificate')->name('participant.certificate.download');
     });
+        Volt::route('information', 'pages.information')->name('information');
 
 });
 

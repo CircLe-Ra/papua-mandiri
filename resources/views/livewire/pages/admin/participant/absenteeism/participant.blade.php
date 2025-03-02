@@ -162,7 +162,7 @@ $attendance = function ($participant_id) {
         <x-slot name="actions">
             <x-form.input-icon id="search" name="search" wire:model.live="search" placeholder="Cari..." size="small">
                 <x-slot name="icon">
-                    <svg class="text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
+                    <svg class="text-blue-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
                          height="24" viewBox="0 0 24 24">
                         <g fill="none">
                             <path fill="currentColor" fill-opacity="0.25" fill-rule="evenodd"
@@ -290,8 +290,7 @@ $attendance = function ($participant_id) {
                 <x-slot name="header">
                     <div>
                     <h5 class="text-xl font-medium text-gray-900 dark:text-white">Absen Peserta</h5>
-                    <p class="text-sm text-gray-600 dark:text-gray-300">Daftar Peserta
-                        Kelas {{ $this->program->name }}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Daftar Peserta Kelas {{ $this->program->name }}</p>
                     </div>
                 </x-slot>
                 <x-slot name="sideHeader">

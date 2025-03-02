@@ -88,7 +88,7 @@ $attendance = function ($participant_id) {
         ->where('level', $this->level)
         ->groupBy('reception_id', 'program_id', 'level')
         ->first();
-    return $absent->absent_count;
+    return $absent->absent_count ?? 0;
 };
 
 $meeting = function ($program_id) {

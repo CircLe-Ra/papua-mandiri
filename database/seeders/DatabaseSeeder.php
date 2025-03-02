@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         Role::create(['name' => 'admin']);
+        Role::create(['name' => 'peserta']);
+        Role::create(['name' => 'pimpinan']);
 
         User::factory()->create([
             'name' => 'Administrator',

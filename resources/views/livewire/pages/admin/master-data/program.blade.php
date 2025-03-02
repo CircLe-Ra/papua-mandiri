@@ -82,7 +82,7 @@ state(['show' => 5, 'search' => null])->url();
                 <x-slot name="actions">
                     <x-form.input-icon id="search" name="search" wire:model.live="search" placeholder="Cari..." size="small">
                         <x-slot name="icon">
-                            <svg class="text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path fill="currentColor" fill-opacity="0.25" fill-rule="evenodd" d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14M10.087 7.38A5 5 0 0 1 12 7a.5.5 0 0 0 0-1a6 6 0 0 0-6 6a.5.5 0 0 0 1 0a5 5 0 0 1 3.087-4.62" clip-rule="evenodd"/><path stroke="currentColor" stroke-linecap="round" d="M20.5 20.5L17 17"/><circle cx="11" cy="11" r="8.5" stroke="currentColor"/></g></svg>
+                            <svg class="text-blue-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path fill="currentColor" fill-opacity="0.25" fill-rule="evenodd" d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14M10.087 7.38A5 5 0 0 1 12 7a.5.5 0 0 0 0-1a6 6 0 0 0-6 6a.5.5 0 0 0 1 0a5 5 0 0 1 3.087-4.62" clip-rule="evenodd"/><path stroke="currentColor" stroke-linecap="round" d="M20.5 20.5L17 17"/><circle cx="11" cy="11" r="8.5" stroke="currentColor"/></g></svg>
                         </x-slot>
                     </x-form.input-icon>
                 </x-slot>
@@ -92,9 +92,12 @@ state(['show' => 5, 'search' => null])->url();
             <div class="w-full col-span-3 lg:col-span-1">
                 <x-card class="mt-2" >
                     <x-slot name="header">
+                        <div>
                         <h5 class="text-xl font-medium text-gray-900 dark:text-white">Tambah Program</h5>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">Silahkan tambahkan program kursus.</p>
+                        </div>
                     </x-slot>
-                    <form wire:submit="store" class="max-w-sm mx-auto">
+                    <form wire:submit="store" class="mx-auto">
                         <x-form.input id="name" name="name" wire:model="name" main-class="mb-2" label="Nama" placeholder="Masukan Nama Program"/>
                         <div x-data="{
                                 amount: @entangle('amount') || '0',
@@ -130,7 +133,10 @@ state(['show' => 5, 'search' => null])->url();
             <div class="col-span-2 ">
                 <x-card class="mt-2 w-full ">
                         <x-slot name="header">
+                            <div>
                             <h5 class="text-xl font-medium text-gray-900 dark:text-white"> Daftar Program</h5>
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">Daftar program kursus yang telah diinputkan.</p>
+                            </div>
                         </x-slot>
                         <x-slot name="sideHeader">
                             <x-form.input-select id="show" name="show" wire:model.live="show" size="xs" >
@@ -160,12 +166,15 @@ state(['show' => 5, 'search' => null])->url();
                                         {{ $program->created_at->diffForHumans() }}
                                     </td>
                                     <td class="px-6 py-4 text-nowrap">
-                                        <x-button color="yellow" wire:click="edit({{ $program->id }})">
-                                            Edit
-                                        </x-button>
-                                        <x-button color="red" wire:click="destroy({{$program->id}})" wire:confirm="Yakin?">
-                                            Hapus
-                                        </x-button>
+                                        <div class="flex flex-nowrap gap-1">
+                                            <x-button class="inline-flex" color="yellow-outline" wire:click="edit({{ $program->id }})">
+                                                <x-icons.edit class="w-4 mr-1" /> Edit
+                                            </x-button>
+                                            <x-button class="inline-flex" color="red-outline" wire:click="destroy({{ $program->id }})" wire:confirm="Data akan dihapus, Yakin?">
+                                                <x-icons.delete class="w-4 mr-1" />
+                                                Hapus
+                                            </x-button>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

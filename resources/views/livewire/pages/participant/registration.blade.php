@@ -274,15 +274,15 @@ $pay = function () {
                         <ol class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400">
                             <li class="mb-10 ms-6">
                                 @if($this->step <= 1)
-                                     <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-                                        <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                     <span class="absolute flex items-center justify-center w-8 h-8 bg-blue-200 rounded-full -start-4 ring-4 ring-blue-300 dark:ring-gray-900 dark:bg-gray-700">
+                                        <svg class="w-3.5 h-3.5 text-blue-500 dark:text-gray-400" aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
                                             <path
                                                 d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z"/>
                                         </svg>
                                     </span>
                                 @else
-                                    <span class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
+                                    <span class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-green-300 dark:ring-gray-900 dark:bg-green-900">
                                         <svg class="w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -291,16 +291,16 @@ $pay = function () {
                                     </span>
                                 @endif
                                 <h3 class="font-medium leading-tight">Data Diri</h3>
-                                <p class="text-sm">Detail langkah di sini</p>
+                                <p class="text-sm">Lengkai data pribadi sesuai KTP</p>
                             </li>
                             <li class="mb-10 ms-6">
                                 @if($this->step <= 2)
-                                    <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-                                        <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M1.637 1.637C.732 1.637 0 2.369 0 3.273v17.454c0 .904.732 1.636 1.637 1.636h20.726c.905 0 1.637-.732 1.637-1.636V3.273c0-.904-.732-1.636-1.637-1.636zm.545 2.181h19.636v16.364h-2.726v-1.09h-4.91v1.09h-12zM12 8.182a1.636 1.636 0 1 0 0 3.273a1.636 1.636 0 1 0 0-3.273m-4.363 1.91c-.678 0-1.229.55-1.229 1.226a1.228 1.228 0 0 0 2.455 0c0-.677-.549-1.226-1.226-1.226m8.726 0a1.227 1.227 0 1 0 0 2.453a1.227 1.227 0 0 0 0-2.453M12 12.545c-1.179 0-2.413.401-3.148 1.006a4.1 4.1 0 0 0-1.215-.188c-1.314 0-2.729.695-2.729 1.559v.896h14.184v-.896c0-.864-1.415-1.559-2.729-1.559c-.41 0-.83.068-1.215.188c-.735-.605-1.969-1.006-3.148-1.006"/></svg>
+                                    <span class="absolute flex items-center justify-center w-8 h-8 bg-blue-200 rounded-full -start-4 ring-4 ring-blue-300 dark:ring-gray-900 dark:bg-gray-700">
+                                        <svg class="w-3.5 h-3.5 text-blue-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M1.637 1.637C.732 1.637 0 2.369 0 3.273v17.454c0 .904.732 1.636 1.637 1.636h20.726c.905 0 1.637-.732 1.637-1.636V3.273c0-.904-.732-1.636-1.637-1.636zm.545 2.181h19.636v16.364h-2.726v-1.09h-4.91v1.09h-12zM12 8.182a1.636 1.636 0 1 0 0 3.273a1.636 1.636 0 1 0 0-3.273m-4.363 1.91c-.678 0-1.229.55-1.229 1.226a1.228 1.228 0 0 0 2.455 0c0-.677-.549-1.226-1.226-1.226m8.726 0a1.227 1.227 0 1 0 0 2.453a1.227 1.227 0 0 0 0-2.453M12 12.545c-1.179 0-2.413.401-3.148 1.006a4.1 4.1 0 0 0-1.215-.188c-1.314 0-2.729.695-2.729 1.559v.896h14.184v-.896c0-.864-1.415-1.559-2.729-1.559c-.41 0-.83.068-1.215.188c-.735-.605-1.969-1.006-3.148-1.006"/></svg>
                                     </span>
                                 @else
                                     <span
-                                        class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
+                                        class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-green-300 dark:ring-gray-900 dark:bg-green-900">
                                         <svg class="w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -309,17 +309,17 @@ $pay = function () {
                                     </span>
                                 @endif
                                 <h3 class="font-medium leading-tight">Kelas Belajar</h3>
-                                <p class="text-sm">Detail langkah di sini</p>
+                                <p class="text-sm">Pilih kelas belajar yang diinginkan</p>
                             </li>
                             <li class="mb-10 ms-6">
                                 @if($this->step <= 3)
                                     <span
-                                        class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-                                        <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M4.75 4A2.75 2.75 0 0 0 2 6.75V8h16V6.75A2.75 2.75 0 0 0 15.25 4zM18 9H2v4.25A2.75 2.75 0 0 0 4.75 16h10.5A2.75 2.75 0 0 0 18 13.25zm-4.5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1"/></svg>
+                                        class="absolute flex items-center justify-center w-8 h-8 bg-blue-200 rounded-full -start-4 ring-4 ring-blue-300 dark:ring-gray-900 dark:bg-gray-700">
+                                        <svg class="w-3.5 h-3.5 text-blue-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M4.75 4A2.75 2.75 0 0 0 2 6.75V8h16V6.75A2.75 2.75 0 0 0 15.25 4zM18 9H2v4.25A2.75 2.75 0 0 0 4.75 16h10.5A2.75 2.75 0 0 0 18 13.25zm-4.5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1"/></svg>
                                     </span>
                                 @else
                                     <span
-                                        class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
+                                        class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-green-300 dark:ring-gray-900 dark:bg-green-900">
                                         <svg class="w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -328,13 +328,13 @@ $pay = function () {
                                     </span>
                                 @endif
                                 <h3 class="font-medium leading-tight">Pembayaran</h3>
-                                <p class="text-sm">Detail langkah di sini</p>
+                                <p class="text-sm">Lakukan pembayaran</p>
                             </li>
                             <li class="ms-6">
                                 @if($this->step <= 4)
                                     <span
-                                        class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-                                        <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        class="absolute flex items-center justify-center w-8 h-8 bg-blue-200 rounded-full -start-4 ring-4 ring-blue-300 dark:ring-gray-900 dark:bg-gray-700">
+                                        <svg class="w-3.5 h-3.5 text-blue-500 dark:text-gray-400" aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                                             <path
                                                 d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z"/>
@@ -342,7 +342,7 @@ $pay = function () {
                                     </span>
                                 @else
                                     <span
-                                        class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
+                                        class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -start-4 ring-4 ring-green-300 dark:ring-gray-900 dark:bg-green-900">
                                         <svg class="w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -351,7 +351,7 @@ $pay = function () {
                                     </span>
                                 @endif
                                 <h3 class="font-medium leading-tight">Selesai</h3>
-                                <p class="text-sm">Detail langkah di sini</p>
+                                <p class="text-sm">Cetak bukti pendaftaran</p>
                             </li>
                         </ol>
                     </x-card>
@@ -679,7 +679,7 @@ $pay = function () {
                                                         <p class="text-sm text-gray-950 dark:text-gray-300">{{ $this->ktp_number }}</p>
                                                     </div>
                                                 </div>
-                                                <div class="border-t-2 border-gray-300 dark:border-gray-700 my-4"></div>
+                                                <div class="hidden print:block border-t-2 border-gray-300 dark:border-gray-700 my-4"></div>
                                                 <div class="flex justify-between">
                                                     <p class="text-sm text-gray-950 dark:text-gray-300">Nama</p>
                                                     <p class="text-sm text-gray-950 dark:text-gray-300">{{ $this->full_name }}</p>

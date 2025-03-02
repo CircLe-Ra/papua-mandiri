@@ -96,7 +96,7 @@ $changeStatus = function ($id, $status) {
         <x-slot name="actions">
             <x-form.input-icon id="search" name="search" wire:model.live="search" placeholder="Cari..." size="small">
                 <x-slot name="icon">
-                    <svg class="text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path fill="currentColor" fill-opacity="0.25" fill-rule="evenodd" d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14M10.087 7.38A5 5 0 0 1 12 7a.5.5 0 0 0 0-1a6 6 0 0 0-6 6a.5.5 0 0 0 1 0a5 5 0 0 1 3.087-4.62" clip-rule="evenodd"/><path stroke="currentColor" stroke-linecap="round" d="M20.5 20.5L17 17"/><circle cx="11" cy="11" r="8.5" stroke="currentColor"/></g></svg>
+                    <svg class="text-blue-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path fill="currentColor" fill-opacity="0.25" fill-rule="evenodd" d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14M10.087 7.38A5 5 0 0 1 12 7a.5.5 0 0 0 0-1a6 6 0 0 0-6 6a.5.5 0 0 0 1 0a5 5 0 0 1 3.087-4.62" clip-rule="evenodd"/><path stroke="currentColor" stroke-linecap="round" d="M20.5 20.5L17 17"/><circle cx="11" cy="11" r="8.5" stroke="currentColor"/></g></svg>
                 </x-slot>
             </x-form.input-icon>
         </x-slot>
@@ -106,9 +106,12 @@ $changeStatus = function ($id, $status) {
         <div class="w-full col-span-3 lg:col-span-1">
             <x-card class="mt-2" >
                 <x-slot name="header">
+                    <div>
                     <h5 class="text-xl font-medium text-gray-900 dark:text-white">Tambah Periode</h5>
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Silahkan masukan data periode pembelajaran.</p>
+                    </div>
                 </x-slot>
-                <form wire:submit="store" class="max-w-sm mx-auto">
+                <form wire:submit="store" class="mx-auto">
                     <x-form.input type="number" id="period" name="period" wire:model="period" label="Tahun" placeholder="Masukan Periode" main-class="mb-2"/>
                     <x-form.input type="date" id="start_course" name="start_course" wire:model="start_course" label="Mulai Kursus" main-class="mb-2"/>
                     <x-form.input type="date" id="complete_course" name="complete_course" wire:model="complete_course" label="Selesai Kursus" main-class="mb-5"/>
@@ -126,7 +129,10 @@ $changeStatus = function ($id, $status) {
         <div class="col-span-2 ">
             <x-card class="mt-2 w-full ">
                 <x-slot name="header">
+                    <div>
                     <h5 class="text-xl font-medium text-gray-900 dark:text-white">Daftar Periode</h5>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Daftar periode pembelajaran yang telah diinputkan.</p>
+                    </div>
                 </x-slot>
                 <x-slot name="sideHeader">
                     <x-form.input-select id="show" name="show" wire:model.live="show" size="xs" class="w-full">
@@ -165,7 +171,7 @@ $changeStatus = function ($id, $status) {
                                         </svg>
                                     </button>
                                     <!-- Dropdown menu -->
-                                    <div id="dropdown-status{{ $key }}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700">
+                                    <div id="dropdown-status{{ $key }}" class="z-50 hidden bg-gray-200 divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700">
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownStatus{{ $key }}">
                                             <li>
                                                 <a href="#" wire:click="changeStatus({{ $reception->id }}, 'active')" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Aktifkan</a>
@@ -177,16 +183,20 @@ $changeStatus = function ($id, $status) {
                                     </div>
 
                                 </td>
-                                <td class="space-x-2 space-y-2 py-3 text-center">
-                                    <x-a wire:navigate href="{{ route('admin.reception.opening', $reception->id) }}" color="blue"  class="text-nowrap mb-2">
-                                        Buka Program
-                                    </x-a>
-                                    <x-button color="yellow" wire:click="edit({{ $reception->id }})" :disabled="$reception->openings->count() > 0">
-                                        Edit
-                                    </x-button>
-                                    <x-button color="red" wire:click="destroy({{ $reception->id }})" wire:confirm="Yakin?" :disabled="$reception->openings->count() > 0">
-                                        Hapus
-                                    </x-button>
+                                <td class="">
+                                    <div class="flex flex-nowrap gap-1">
+                                        <x-a wire:navigate class="inline-flex text-nowrap " href="{{ route('admin.reception.opening', $reception->id) }}" color="blue-outline" >
+                                            <x-icons.add class="w-4 mr-1" />
+                                            Buka Program
+                                        </x-a>
+                                        <x-button class="inline-flex" color="yellow-outline" wire:click="edit({{ $reception->id }})" :disabled="$reception->openings->count() > 0">
+                                                <x-icons.edit class="w-4 mr-1" /> Edit
+                                        </x-button>
+                                        <x-button class="inline-flex" color="red-outline" wire:click="destroy({{ $reception->id }})" wire:confirm="Yakin?" :disabled="$reception->openings->count() > 0">
+                                            <x-icons.delete class="w-4 mr-1" />
+                                            Hapus
+                                        </x-button>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

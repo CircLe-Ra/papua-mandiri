@@ -122,7 +122,7 @@ $find = function () {
                                     {{ $participant->level == 1 ? 'Level Dasar (Basic) ' : ($participant->level == 2 ? 'Level Menengah (Intermediate)' : 'Level Mahir (Advanced)') }}
                                 </td>
                                 <td class="px-6 py-4 text-nowrap">
-                                    <x-a size="xs" color="blue" :disabled="$participant->certificate == null" href="{{ $participant->certificate != null ? asset('storage/' . $participant->certificate) : '#' }}" target="{{  $participant->certificate != null ? '_blank' : '' }}">
+                                    <x-a size="xs" color="blue-outline" :disabled="$participant->certificate == null" href="{{ $participant->certificate != null ? asset('storage/' . $participant->certificate) : '#' }}" target="{{  $participant->certificate != null ? '_blank' : '' }}">
                                         Lihat
                                         <svg class="rotate-45 inline -mt-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12l7-7l7 7m-7 7V5"/></svg>
                                     </x-a>

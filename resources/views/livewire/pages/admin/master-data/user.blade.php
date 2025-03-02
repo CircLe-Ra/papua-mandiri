@@ -90,13 +90,14 @@ $destroy = function ($id) {
 
 <div>
     <x-breadcrumbs :crumbs="[
-        ['text' => __('Dashboard'), 'href' => '/dashboard'],
-        ['text' => __('Users'), 'href' => route('admin.master-data.user')]
+        ['href' => route('dashboard'), 'text' => 'Dashboard'],
+        ['text' => 'Master Data'],
+        ['text' => 'Pengguna']
     ]">
         <x-slot name="actions">
             <x-form.input-icon id="search" name="search" wire:model.live="search" placeholder="Cari..." size="small">
                 <x-slot name="icon">
-                    <svg class="text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <svg class="text-blue-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <g fill="none">
                             <path fill="currentColor" fill-opacity="0.25" fill-rule="evenodd" d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14M10.087 7.38A5 5 0 0 1 12 7a.5.5 0 0 0 0-1a6 6 0 0 0-6 6a.5.5 0 0 0 1 0a5 5 0 0 1 3.087-4.62" clip-rule="evenodd"/>
                             <path stroke="currentColor" stroke-linecap="round" d="M20.5 20.5L17 17"/>
@@ -113,9 +114,12 @@ $destroy = function ($id) {
         <div class="w-full col-span-3 lg:col-span-1">
             <x-card class="mt-2">
                 <x-slot name="header">
+                    <div>
                     <h5 class="text-xl font-medium text-gray-900 dark:text-white">{{ __('Tambah Pengguna') }}</h5>
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Silahkan masukan data pengguna.</p>
+                    </div>
                 </x-slot>
-                <form wire:submit="store" class="max-w-sm mx-auto">
+                <form wire:submit="store" class="mx-auto">
                     <input type="hidden" wire:model="idData">
                     <x-form.input id="name" name="name" wire:model="name" main-class="mb-2" label="Nama" placeholder="Masukkan Nama" />
                     <x-form.input type="email" id="email" name="email" wire:model="email" main-class="mb-2" label="Email" placeholder="Masukkan Email" />
@@ -131,7 +135,7 @@ $destroy = function ($id) {
                         </x-form.input-select>
                     </div>
 
-                    <div class="flex justify-end space-x-2 mt-4">
+                    <div class="flex justify-end space-x-2 mt-5">
                         <x-button type="reset" color="light">{{ __('Batal') }}</x-button>
                         <x-button type="submit" color="blue" wire:loading.attr="disabled" wire:loading.class="cursor-not-allowed">{{ __('Simpan') }}</x-button>
                     </div>
@@ -143,7 +147,10 @@ $destroy = function ($id) {
         <div class="col-span-2">
             <x-card class="mt-2 w-full">
                 <x-slot name="header">
+                    <div>
                     <h5 class="text-xl font-medium text-gray-900 dark:text-white">{{ __('Daftar Pengguna') }}</h5>
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Daftar pengguna yang telah diinputkan.</p>
+                    </div>
                 </x-slot>
                 <x-slot name="sideHeader">
                     <x-form.input-select id="show" name="show" wire:model.live="showing" size="xs">
@@ -166,8 +173,15 @@ $destroy = function ($id) {
                                 <td class="px-6 py-4">{{ $user->roles->first()->name ?? __('No Role') }}</td>
                                 <td class="px-6 py-4">{{ $user->created_at->diffForHumans() }}</td>
                                 <td class="px-6 py-4 text-nowrap">
-                                    <x-button color="yellow" wire:click="edit({{ $user->id }})">Edit</x-button>
-                                    <x-button color="red" wire:click="destroy({{ $user->id }})" wire:confirm="Yakin?">Hapus</x-button>
+                                    <div class="flex flex-nowrap gap-1">
+                                        <x-button class="inline-flex" color="yellow-outline" wire:click="edit({{ $user->id }})">
+                                            <x-icons.edit class="w-4 mr-1" /> Edit
+                                        </x-button>
+                                        <x-button class="inline-flex" color="red-outline" wire:click="destroy({{ $user->id }})" wire:confirm="Data akan dihapus, Yakin?">
+                                            <x-icons.delete class="w-4 mr-1" />
+                                            Hapus
+                                        </x-button>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
