@@ -12,4 +12,9 @@ class Absent extends Model
    {
        return $this->hasMany(AbsentDetail::class);
    }
+
+   public function reception()
+   {
+       return $this->belongsTo(Reception::class);
+   }
 }

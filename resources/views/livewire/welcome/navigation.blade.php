@@ -5,7 +5,7 @@
         </a>
         <div class="flex items-center lg:order-2">
 
-            <div class=" mr-2 bg-dark lg:flex dark:bg-gray-800 md:hidden" sidebar-bottom-menu="" bis_skin_checked="1"  x-cloak>
+            <div class=" mr-4 bg-dark lg:flex dark:bg-gray-800 md:hidden" sidebar-bottom-menu="" bis_skin_checked="1"  x-cloak>
                 <label class="inline-flex items-center cursor-pointer w-full">
                     <input type="checkbox" id="theme-toggle" class="sr-only peer" onclick="toggleDarkMode()" />
                     <span class="text-sm font-medium text-gray-900 ms-3 dark:text-gray-300">
@@ -16,9 +16,9 @@
             </div>
             @auth
                 @if(Auth::user()->roles()->first()->name == 'admin' || Auth::user()->roles()->first()->name == 'pimpinan')
-                    <a href="{{ url('/admin/dashboard') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">Dashboard</a>
+                    <a href="{{ url('/admin/dashboard') }}" class="bg-blue-600 text-white rounded-md px-3 py-2  ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">Dashboard</a>
                 @else
-                <a href="{{ url('/dashboard') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">Dashboard</a>
+                <a href="{{ url('/dashboard') }}" class="bg-blue-600 text-white rounded-md px-3 py-2  ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">Dashboard</a>
 
                 @endif
             @else

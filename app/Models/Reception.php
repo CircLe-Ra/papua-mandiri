@@ -18,4 +18,9 @@ class Reception extends Model
         return $this->hasMany(Participant::class);
     }
 
+    public function absents()
+    {
+        return $this->hasMany(Absent::class);
+    }
+
 }

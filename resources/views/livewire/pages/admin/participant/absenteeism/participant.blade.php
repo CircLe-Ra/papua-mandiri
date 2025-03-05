@@ -13,12 +13,10 @@ usesPagination();
 layout('layouts.app');
 state(['reception_id' => fn($reception) => $reception, 'program_id' => fn($program) => $program])->locked();
 state(['program', 'meeting','totalMeeting']);
-state(['absents' => [], 'current_absent' => 0, 'date' => date('Y-m-d'), 'status' => 'present', 'dates' => []]);
+state(['absents' => [], 'current_absent' => 0, 'date' => date('Y-m-d'), 'status' => 'present', 'dates' => [], 'disable_meeting' => false]);
 state(['show' => '', 'search' => null, 'level' => 1])->url(keep: false);
 
-mount(function () {
-    $this->program = Program::where('id', $this->program_id)->first();
-
+$getDates = function () {
     $this->dates = Absent::where('program_id', $this->program_id)
         ->where('reception_id', $this->reception_id)
         ->where('level', $this->level)
@@ -31,7 +29,11 @@ mount(function () {
     if (!in_array($today, array_column($this->dates, 'date'))) {
         $this->dates[] = ['date' => $today];
     }
+};
 
+mount(function () {
+    $this->program = Program::where('id', $this->program_id)->first();
+    $this->getDates();
     $this->totalMeeting = Opening::where('reception_id', $this->reception_id)
         ->where('program_id', $this->program_id)->first()->meeting;
     $meeting = Absent::where('program_id', $this->program_id)
@@ -88,11 +90,25 @@ updated(['level' => function () {
     if (!in_array($today, array_column($this->dates, 'date'))) {
         $this->dates[] = ['date' => $today];
     }
+}, 'date' => function () {
+    $absent = Absent::where('program_id', $this->program_id)
+        ->where('reception_id', $this->reception_id)
+        ->where('level', $this->level)
+        ->where('date', $this->date)->first();
+    if ($absent) {
+        $this->meeting = $absent->meeting;
+        $this->disable_meeting = true;
+    }else{
+        $this->meeting = Absent::where('program_id', $this->program_id)
+            ->where('reception_id', $this->reception_id)
+            ->where('level', $this->level)->latest()->first()->meeting + 1 ?? 1;
+        $this->disable_meeting = false;
+    }
 }]);
 
 $next = function ($participan_id) {
     $this->validate([
-        'date' => 'required|date',
+        'date' => 'required|date|after_or_equal:' . Absent::with('reception')->where('program_id', $this->program_id)->where('reception_id', $this->reception_id)->latest()->first()->reception->start_course,
         'meeting' => 'required|integer',
         'status' => 'required|string|in:present,absent,sick,excused',
     ]);
@@ -100,6 +116,7 @@ $next = function ($participan_id) {
     if ($this->current_absent < count($this->absents) - 1) {
         $this->current_absent++;
     }else{
+        $this->disable_meeting = false;
         $this->dispatch('close-modal', id: 'absenteeism-participant-modal-1')->self();
         Toaster::success('Absen Selesai');
     }
@@ -116,6 +133,7 @@ $next = function ($participan_id) {
             'absent_id' => $absent->id,
             'participant_id' => $participan_id,
         ],['status' => $this->status]);
+        $this->getDates();
     }catch (\Exception $e) {
         Toaster::error($e->getMessage());
     }
@@ -209,10 +227,10 @@ $attendance = function ($participant_id) {
                                 @endfor
                             </x-form.input-select>
                         </div>
+
                         <div class="flex flex-col py-3">
                             <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Tanggal</dt>
-                            <x-form.input id="date" name="date" type="date" required main-class="w-full"
-                                          wire:model="date"/>
+                            <x-form.input id="date" name="date" type="date" required main-class="w-full" wire:model.live="date" />
                         </div>
                     </div>
                     <div class="flex flex-col py-3">
@@ -308,7 +326,7 @@ $attendance = function ($participant_id) {
                             <option value="2">Level Menengah (Intermediate)</option>
                             <option value="3">Level Mahir (Advanced)</option>
                         </x-form.input-select>
-                        <x-form.input-select id="date" name="date" wire:model.live="date" size="xs" class="w-full" >
+                        <x-form.input-select id="date" name="date" wire:model.live="date" size="xs" class="w-full" :alert="false">
                             @foreach(collect($this->dates)->reverse() as $key => $item)
                                 <option value="{{ $item['date'] }}" @selected($item['date'] == date('Y-m-d'))>{{ $item['date'] }}</option>
                             @endforeach

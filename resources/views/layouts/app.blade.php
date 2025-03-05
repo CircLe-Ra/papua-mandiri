@@ -75,15 +75,34 @@
 </head>
 <body class="bg-neutral-100 dark:bg-gray-900">
         <livewire:layout.navigation />
-        <div class="py-4 px-2  sm:ml-64">
+        <div class="py-4 px-2 sm:ml-64">
             <div class="mt-12 rounded-lg dark:border-gray-700">
                 {{ $slot }}
             </div>
+        <footer class="bg-neutral-200 rounded-lg shadow-sm w-[calc(100%-1.5rem)]  sm:w-[calc(100%-17.5rem)] md:w-[calc(100%-17rem)] fixed dark:bg-gray-800 bottom-1">
+            <div class="w-full mx-auto p-4 md:flex md:items-center md:justify-between">
+                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">©{{ date('Y') }} <a href="#" class="hover:underline">THENEXT</a>. All Rights Reserved.</span>
+                <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Tentang</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Kebijakan Privasi</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Lisensi</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
         </div>
 
         <script>
-
             document.addEventListener('livewire:navigated', function () {
+
                 let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
                 let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
                 let themeToggleCheckbox = document.getElementById('theme-toggle');
@@ -99,7 +118,8 @@
                     themeToggleLightIcon.classList.remove('hidden');
                     themeToggleCheckbox.checked = false;
                 }
-                const toggleDarkMode = () => {
+
+                function toggleDarkMode() {
                     if (themeToggleCheckbox.checked) {
                         document.documentElement.classList.add('dark');
                         localStorage.setItem('color-theme', 'dark');
@@ -113,6 +133,7 @@
                     }
                 };
                 themeToggleCheckbox.addEventListener('change', toggleDarkMode);
+
             }, { once: true });
         </script>
 

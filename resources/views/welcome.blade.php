@@ -16,7 +16,7 @@
         }
     </script>
 </head>
-<body>
+<body >
 <header>
     <livewire:welcome.navigation />
 </header>
