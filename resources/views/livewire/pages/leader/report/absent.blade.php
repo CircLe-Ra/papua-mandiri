@@ -14,7 +14,7 @@
         ->where('level', (int)$level)
         ->groupBy('reception_id', 'program_id', 'level')
         ->first();
-    return $absent->absent_count;
+    return $absent->absent_count ?? 0 ;
 };
 
 $meeting = function ($program_id, $reception) {
@@ -64,7 +64,6 @@ $meeting = function ($program_id, $reception) {
                                 {{ $loop->iteration }}
                             </td>
                             <th scope="row" style="display: flex; align-items: center; padding: 0.75rem; color: #1f2937; white-space: nowrap;">
-                                <img style="width: 2.5rem; height: 2.5rem; border-radius: 9999px; margin-right: 0.75rem;" src="{{ public_path('storage/' . $participant->user->profile_photo_path) }}" alt="">
                                 <div>
                                     <div style="font-weight: 600;">{{ $participant->user->personal_data->full_name }}</div>
                                     <div style="font-size: 0.875rem; color: #6b7280;">{{ $participant->user->email }}</div>

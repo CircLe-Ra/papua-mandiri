@@ -88,7 +88,7 @@ $programActive = computed(function () {
             ]
         ]">
         <x-slot:actions>
-            <p class="my-[5px]">Selamat datang, {{ auth()->user()->name }}</p>
+            <p class="my-[5px] dark:text-white">Selamat datang, {{ auth()->user()->name }}</p>
         </x-slot:actions>
     </x-breadcrumbs>
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mt-2">

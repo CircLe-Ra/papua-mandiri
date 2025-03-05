@@ -108,7 +108,7 @@ updated(['level' => function () {
 
 $next = function ($participan_id) {
     $this->validate([
-        'date' => 'required|date|after_or_equal:' . Absent::with('reception')->where('program_id', $this->program_id)->where('reception_id', $this->reception_id)->latest()->first()->reception->start_course,
+        'date' => 'required|date|after_or_equal:' . Reception::where('status', 'active')->first()->start_course,
         'meeting' => 'required|integer',
         'status' => 'required|string|in:present,absent,sick,excused',
     ]);

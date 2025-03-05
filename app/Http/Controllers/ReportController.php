@@ -35,7 +35,7 @@ class ReportController extends Controller
                 'program' => $program,
                 'level' => $level
             ])->setPaper('a4', 'landscape');
-            return $pdf->download('absent.pdf');
+            return $pdf->stream('absent.pdf');
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
