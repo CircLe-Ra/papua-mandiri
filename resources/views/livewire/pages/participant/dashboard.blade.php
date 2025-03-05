@@ -39,7 +39,7 @@ $absents = computed(function () {
             <p class="my-[5px] dark:text-white">Selamat datang, {{ auth()->user()->personal_data?->full_name ?? auth()->user()->name  }}</p>
         </x-slot:actions>
     </x-breadcrumbs>
-    <div class="w-full mb-16">
+    <div class="w-full ">
         <div class="grid grid-cols-1 gap-2 md:grid-cols-2 ">
             <x-card class="mt-2 w-full h-full">
                 <h5 class="text-gray-900 dark:text-white text-center font-bold text-2xl">Selamat Datang</h5>
@@ -81,7 +81,7 @@ $absents = computed(function () {
                     <h5 class="text-xl font-medium text-gray-900 dark:text-white">Program Kursus</h5>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">Program kursus yang dipilih</p>
                 </div>
-                    <div class=" bg-white dark:bg-gray-800 border  dark:border-gray-700 p-2 rounded-lg h-48">
+                    <div class=" bg-white dark:bg-gray-800 border  dark:border-gray-700 p-2 rounded-lg {{ $this->participant ? '' : 'h-48' }}">
                         <p class="text-sm text-gray-600 dark:text-gray-300 font-bold flex justify-center mt-2">Informasi Program</p>
                         <div class="border-t-2 border-gray-300 dark:border-gray-700 my-4"></div>
                         @if($this->participant)

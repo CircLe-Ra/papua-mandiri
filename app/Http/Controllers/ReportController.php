@@ -27,8 +27,18 @@ class ReportController extends Controller
             ->where('payment', 'paid')
             ->latest()->get();
 
-        $pdf = Pdf::loadView('livewire.pages.leader.report.absent',  ['participants' => $participants, 'period' => $period, 'reception' => $reception, 'program' => $program, 'level' => $level])->setPaper('a4', 'landscape');;
-        return $pdf->stream('absent.pdf');
+        try {
+            $pdf = Pdf::loadView('livewire.pages.leader.report.absent', [
+                'participants' => $participants,
+                'period' => $period,
+                'reception' => $reception,
+                'program' => $program,
+                'level' => $level
+            ])->setPaper('a4', 'landscape');
+            return $pdf->download('absent.pdf');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
 //        return view('livewire.pages.leader.report.absent', ['participants' => $participants, 'period' => $period, 'reception' => $reception, 'program' => $program, 'level' => $level]);
     }
 }

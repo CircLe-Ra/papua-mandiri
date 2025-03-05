@@ -76,7 +76,7 @@
 <body class="bg-neutral-100 dark:bg-gray-900">
         <livewire:layout.navigation />
         <div class="py-4 px-2 sm:ml-64">
-            <div class="mt-12 rounded-lg dark:border-gray-700">
+            <div class="mt-12 rounded-lg dark:border-gray-700 mb-16">
                 {{ $slot }}
             </div>
         <footer class="bg-neutral-200 rounded-lg shadow-sm w-[calc(100%-1.5rem)]  sm:w-[calc(100%-17.5rem)] md:w-[calc(100%-17rem)] fixed dark:bg-gray-800 bottom-1">
